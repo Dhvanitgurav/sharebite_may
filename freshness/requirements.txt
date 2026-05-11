@@ -1,0 +1,9 @@
+# Food freshness API — pin versions for reproducible deploys
+tensorflow>=2.15.0,<2.19.0
+fastapi>=0.109.0,<0.116.0
+uvicorn[standard]>=0.27.0,<0.32.0
+python-multipart>=0.0.9,<0.1.0
+Pillow>=10.2.0,<11.0.0
+numpy>=1.26.0,<2.1.0
+datasets>=2.16.0,<3.0.0
+huggingface_hub>=0.20.0,<0.26.0

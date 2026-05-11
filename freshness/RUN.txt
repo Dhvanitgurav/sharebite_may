@@ -1,0 +1,57 @@
+Food Freshness API — how to run
+================================
+
+1) Create a virtual environment (recommended):
+
+   python -m venv .venv
+   .venv\Scripts\activate          (Windows)
+   source .venv/bin/activate       (Linux / macOS)
+
+2) Install dependencies:
+
+   pip install -r requirements.txt
+
+3) Download human-edible fruit/food (fresh vs rotten) images into dataset/:
+
+   python download_dataset.py
+
+   Uses Hugging Face ``Densu341/Fresh-rotten-fruit`` by default (large fruit set).
+   Override: set HF_DATASET_NAME to another image dataset if needed.
+
+   You can add more photos of vegetables, bread, cooked food, etc. under the same
+   ``fresh`` and ``rotten`` folders before training.
+
+4) Train:
+
+   python train.py
+
+   This writes food_model.h5 and class_indices.json in this folder.
+
+5) Start the API:
+
+   uvicorn main:app --reload --host 0.0.0.0 --port 8000
+
+6) Test prediction (camera and upload both use the same call):
+
+   curl -X POST "http://localhost:8000/predict" -F "file=@path/to/your.jpg"
+
+Environment variables (optional)
+--------------------------------
+HF_DATASET_NAME          Hugging Face dataset id for download_dataset.py (default: Densu341/Fresh-rotten-fruit)
+FOOD_MODEL_PATH          Path to trained weights (default: ./freshness_fixed.h5 next to predict.py)
+FOOD_CLASS_INDICES_PATH  Path to class_indices.json (must match training order; default: ./class_indices.json)
+CORS_ORIGINS             Comma-separated origins for browser calls (if any)
+
+ShareBite integration
+---------------------
+React (Hotel donor) uses the same JWT as other APIs. With **auto-assist** on (default),
+choosing a food photo **automatically** triggers ``POST /api/freshness/ml/predict`` (debounced);
+Spring proxies to Python ``POST /predict``.
+
+On **Publish donation**, Spring **runs the same AI again** on the file saved under ``file.upload.dir``
+and **overwrites** ``mlFreshness*`` on the donation — client values cannot spoof production results.
+If the server says **ROTTEN** with high confidence and type is **HUMAN** or **DOG**, publish is
+blocked unless the donor sets **COMPOST** or sends **mlPolicyOverrideReason** (15+ chars). See
+``freshness.publish.require-successful-ml`` in Spring ``application.properties``.
+
+Start Python first, then Spring, then the React app.

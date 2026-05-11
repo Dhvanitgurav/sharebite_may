@@ -1,0 +1,607 @@
+{
+  "suggestedOpeners": [
+    "How do I publish a food donation?",
+    "What does the AI freshness check do?",
+    "How do I request food as a needy user?",
+    "How does volunteering and pickup work?",
+    "What is the compost agency panel for?",
+    "Why was my account not approved?",
+    "What donation types exist — human, dog, compost?",
+    "How do I fix database or login errors?",
+    "Where do I configure the AI Python service?",
+    "How do points and badges work?",
+    "How does live tracking on the map work?",
+    "What is the difference between AI freshness and star ratings?",
+    "How do I upload a food photo?",
+    "What happens when a donation expires?",
+    "How does an NGO use the platform?",
+    "Can I use my phone camera for donations?",
+    "What is ShareBite in one sentence?",
+    "How do I train the food freshness model?",
+    "What does JWT or token mean?",
+    "How do I change dark mode?",
+    "Why was my donation blocked by server AI?"
+  ],
+  "topics": [
+    {
+      "id": "what_is_sharebite",
+      "keywords": ["what is", "sharebite", "bite sharing", "platform", "overview", "purpose", "mission", "about", "intro", "explain"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "What is ShareBite?",
+      "body": "ShareBite (Bite Sharing) is a zero-food-waste donation platform: hotels and donors list surplus meals, NGOs and needy users request them, volunteers pick up and deliver (or route to compost), and compost agencies complete organic disposal. Everyone has a role-specific dashboard after login.",
+      "link": "/",
+      "linkLabel": "Home"
+    },
+    {
+      "id": "login_register",
+      "keywords": ["login", "sign in", "signin", "register", "sign up", "signup", "create account", "password", "username", "account", "jwt", "auth", "authentication", "credential", "forgot password", "reset password"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Login and registration",
+      "body": "Use **Register** to choose your role (Hotel, NGO, Needy, Volunteer, Compost agency) and submit details. An **Admin** may need to **approve** you before you can use protected features. Use **Login** with username and password; you receive a **JWT token** stored in the browser. After login you are redirected to the correct dashboard for your role.",
+      "link": "/login",
+      "linkLabel": "Login"
+    },
+    {
+      "id": "approval_pending",
+      "keywords": ["approve", "approval", "pending", "not approved", "blocked", "access denied", "waiting", "admin approve", "403", "cannot login", "restricted"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Account pending or not approved",
+      "body": "New accounts can be in **PENDING** until an Admin approves them. If you see warnings or cannot upload, your account may still be pending. Contact your organization’s admin or the system administrator. Admins use the Admin panel to review users.",
+      "link": "/admin",
+      "linkLabel": "Admin panel"
+    },
+    {
+      "id": "session_token",
+      "keywords": ["token", "jwt", "session", "expired", "401", "403", "logout", "logged out", "unauthorized", "authentication failed", "bear"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Session and token issues",
+      "body": "The app stores your **token** after login. If it **expires** or is invalid, you may get **401** and be sent to login again. Try **logging out and back in**. Ensure the frontend `api.js` **base URL** matches your Spring server. Do not share your token.",
+      "link": "/login",
+      "linkLabel": "Login again"
+    },
+    {
+      "id": "roles_overview",
+      "keywords": ["role", "roles", "user type", "hotel", "ngo", "needy", "volunteer", "compost", "admin", "who can", "dashboard", "panel"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "User roles on ShareBite",
+      "body": "**HOTEL** — list surplus food donations. **NEEDY** — browse and request meals. **VOLUNTEER** — accept pickups, deliver, live tracking. **NGO** — coordinate distribution. **COMPOST_AGENCY** — handle spoiled/organic waste with proof. **ADMIN** — approve users and oversee the system. Each role opens a different URL after login (`/hotel`, `/needy`, etc.).",
+      "link": "/register",
+      "linkLabel": "Register — choose role"
+    },
+    {
+      "id": "hotel_donation_create",
+      "keywords": ["donation", "donate", "publish", "post", "list", "surplus", "meal", "food", "hotel", "donor", "create donation", "new donation", "offer food", "give food"],
+      "roles": ["HOTEL", "ALL"],
+      "public": true,
+      "title": "Publishing a donation (Hotel)",
+      "body": "Click **Publish donation**. Fill **food name**, **description**, **quantity**, **expiry date/time**, **donation type**, **pickup address**, optional **latitude/longitude**, and optional **photo**. Submit saves the donation as **PENDING** so others can request it. You earn **gamification points** for creating donations.",
+      "link": "/hotel",
+      "linkLabel": "Hotel panel"
+    },
+    {
+      "id": "donation_types",
+      "keywords": ["human", "dog", "stray", "compost", "donation type", "consumption", "who eats", "animal", "organic waste", "type human", "type dog"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Donation types: Human, Dog, Compost",
+      "body": "**HUMAN** — food safe for people. **DOG** — suitable for stray dogs. **COMPOST** — not for eating; goes to composting / organic processing. Choose the type when publishing; needy users filter **available** donations by type. AI may suggest **COMPOST** if a photo looks unsafe for humans.",
+      "link": "/hotel",
+      "linkLabel": "Hotel — donation form"
+    },
+    {
+      "id": "donation_status",
+      "keywords": ["status", "pending", "accepted", "picked", "delivered", "composted", "expired", "lifecycle", "state", "what does pending mean"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Donation status lifecycle",
+      "body": "Typical flow: **PENDING** (listed) → **ACCEPTED** (someone took the request) → **PICKED_UP** → **DELIVERED** or **COMPOSTED**. **EXPIRED** if the meal passes its expiry while still pending. Hotels see status in their donation table; volunteers update progress.",
+      "link": "/hotel",
+      "linkLabel": "Hotel donations"
+    },
+    {
+      "id": "expiry_donation",
+      "keywords": ["expiry", "expire", "expiration", "datetime", "how long", "valid until", "shelf life", "hours"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Expiry date on donations",
+      "body": "Every donation has an **expiry date/time** you set. The system can **mark donations expired** when that time passes. The **AI suggested expiry** (e.g. a few hours for confident fresh food) only fills the field if it was empty and auto-assist is on — you can always edit it.",
+      "link": "/hotel",
+      "linkLabel": "Hotel"
+    },
+    {
+      "id": "photo_upload",
+      "keywords": ["photo", "image", "picture", "upload", "file", "camera", "jpg", "png", "multipart", "attach"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Food photos and uploads",
+      "body": "Choose an **image** on the donation form; the app uploads it to Spring (`/api/files/upload`) and stores a **photo URL** on the donation. **Images only**; large files may hit the **10MB** multipart limit in `application.properties`. On phones, picking from gallery or camera both produce a file upload — same flow.",
+      "link": "/hotel",
+      "linkLabel": "Hotel"
+    },
+    {
+      "id": "ai_freshness_overview",
+      "keywords": ["ai", "fresh", "rotten", "freshness", "cnn", "neural", "model", "python", "fastapi", "predict", "smart assessment", "auto-assist", "re-analyze", "machine learning", "ml"],
+      "roles": ["HOTEL", "ALL"],
+      "public": true,
+      "title": "AI food freshness (Hotel)",
+      "body": "**Smart food assessment** sends your photo through Spring (`/api/freshness/ml/predict`) to a **Python FastAPI** service running a **TensorFlow/Keras** model. With **auto-assist** on, analysis runs automatically after you pick a photo (debounced). Results: **FRESH / ROTTEN**, confidence, message, suggested hours. **Train** the model from `freshness-api` with `download_dataset.py` and `train.py` to produce `food_model.h5`.",
+      "link": "/hotel",
+      "linkLabel": "Hotel"
+    },
+    {
+      "id": "ai_freshness_config",
+      "keywords": ["8000", "uvicorn", "food_model", "h5", "freshness.api", "python service", "configure ai", "start model", "localhost:8000", "class_indices"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Configuring the AI service",
+      "body": "In Spring `application.properties`, set **freshness.api.base-url** to your Python host (e.g. `http://localhost:8000`). Run from `freshness-api`: `pip install -r requirements.txt`, optionally `python download_dataset.py`, `python train.py`, then `uvicorn main:app --host 0.0.0.0 --port 8000`. If the model is missing, `/predict` returns **503** — check `/health` on the Python app.",
+      "link": "/",
+      "linkLabel": "See freshness-api RUN.txt"
+    },
+    {
+      "id": "ai_vs_star_rating",
+      "keywords": ["star", "rating", "1-5", "five", "manual rating", "needy rating", "difference", "two freshness"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "AI freshness vs star ratings",
+      "body": "**Hotel AI** — automated image classifier before or at donation time (CNN). **Needy star ratings** — after delivery, recipients rate **1–5** freshness manually via `/api/freshness`. They measure different things; both can coexist for trust and feedback.",
+      "link": "/needy",
+      "linkLabel": "Needy panel"
+    },
+    {
+      "id": "needy_browse_request",
+      "keywords": ["needy", "request", "browse", "available", "meal", "hungry", "apply", "claim", "order food", "get food"],
+      "roles": ["NEEDY", "ALL"],
+      "public": true,
+      "title": "Needy: browsing and requesting",
+      "body": "Open the **Needy** dashboard. Browse **available donations** by type (human/dog/compost where applicable). Create a **request** tied to a donation; track request **status**. After delivery you can leave a **freshness star rating** and comment for that donation.",
+      "link": "/needy",
+      "linkLabel": "Needy panel"
+    },
+    {
+      "id": "volunteer_flow",
+      "keywords": ["volunteer", "pickup", "pick up", "delivery", "deliver", "assign", "accept", "bike", "rider", "courier", "volunteering"],
+      "roles": ["VOLUNTEER", "ALL"],
+      "public": true,
+      "title": "Volunteer pickups and delivery",
+      "body": "Volunteers see **requests** for donations (often from needy users). **Accept** or progress the assignment, update **status**, and use **live location** so the hotel donor can **track** the route on the map (WebSocket + OpenStreetMap). Upload **delivery proof** or **compost proof** when the workflow requires it.",
+      "link": "/volunteer",
+      "linkLabel": "Volunteer panel"
+    },
+    {
+      "id": "tracking_map",
+      "keywords": ["map", "tracking", "track", "live", "websocket", "ws", "location", "gps", "route", "eta", "leaflet", "volunteer location"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Live map tracking",
+      "body": "Hotels can **track** an active volunteer request on a **map** (e.g. Leaflet tiles). Updates come over **WebSocket** (`/ws`) from the backend. If the map is empty, the volunteer may not have started sharing location yet. **ETA** and distance may show when routing data is available.",
+      "link": "/hotel",
+      "linkLabel": "Hotel — tracking section"
+    },
+    {
+      "id": "ngo_panel",
+      "keywords": ["ngo", "charity", "nonprofit", "organization", "coordinate", "distribution", "outreach"],
+      "roles": ["NGO", "ALL"],
+      "public": true,
+      "title": "NGO panel",
+      "body": "NGOs use their dashboard to **review donations and requests** aligned with their mission — connecting surplus food to people in need. Features depend on your build; use lists and filters to find **pending** or **available** items.",
+      "link": "/ngo",
+      "linkLabel": "NGO panel"
+    },
+    {
+      "id": "compost_agency",
+      "keywords": ["compost", "composting", "organic", "spoiled", "waste plant", "proof", "composted", "agency"],
+      "roles": ["COMPOST_AGENCY", "ALL"],
+      "public": true,
+      "title": "Compost agency",
+      "body": "Compost partners finalize items marked for **compost** disposal. Mark requests **COMPOSTED**, attach **compost proof** (photo/URL) and notes where the app asks. Hotels can see **compost proof** in tracking dialogs when status is composted.",
+      "link": "/compost",
+      "linkLabel": "Compost panel"
+    },
+    {
+      "id": "admin_panel",
+      "keywords": ["admin", "moderate", "users", "approve user", "system", "manage", "ban"],
+      "roles": ["ADMIN", "ALL"],
+      "public": true,
+      "title": "Admin panel",
+      "body": "**ADMIN** users open `/admin` to **approve pending registrations**, oversee users and activity, and keep the platform healthy. Default demo admin may exist in seed data — change passwords in production.",
+      "link": "/admin",
+      "linkLabel": "Admin panel"
+    },
+    {
+      "id": "gamification_points",
+      "keywords": ["points", "gamification", "badge", "badges", "level", "score", "reward", "history", "leader"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Points, badges, and levels",
+      "body": "Users earn **points** for actions (e.g. creating donations, completing deliveries, compost events). The app shows **total points** and **level** on dashboards like the Hotel panel. **Badges** may be awarded for milestones. Details come from `/api/gamification` endpoints.",
+      "link": "/hotel",
+      "linkLabel": "Hotel — stats"
+    },
+    {
+      "id": "database_mysql",
+      "keywords": ["mysql", "database", "jdbc", "connection", "bitesharing", "schema", "503", "database error", "datasource", "sql"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Database (MySQL)",
+      "body": "Spring Boot uses **MySQL** (`spring.datasource.url` in `application.properties`, database name often **bitesharing**). Ensure MySQL is running, credentials match, and `spring.jpa.hibernate.ddl-auto=update` for dev. **503 / DATABASE_ERROR** usually means the API cannot reach the database — fix host, port **3306**, user, password, or firewall.",
+      "link": "/",
+      "linkLabel": "Home"
+    },
+    {
+      "id": "frontend_api_url",
+      "keywords": ["api.js", "base url", "8080", "3000", "react", "frontend", "axios", "cors", "localhost", "network", "wrong host"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Frontend API base URL",
+      "body": "React’s `src/utils/api.js` sets **API_BASE_URL** (e.g. `http://localhost:8080/api` or your LAN IP). It must match where **Spring Boot** listens. **CORS** in Spring allows origins like `http://localhost:3000`. If calls fail, verify URL, that Spring is up, and browser console for CORS or mixed-content errors.",
+      "link": "/",
+      "linkLabel": "Home"
+    },
+    {
+      "id": "chatbot_help",
+      "keywords": ["chatbot", "help", "assistant", "this bot", "faq", "knowledge", "who are you"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "This help assistant",
+      "body": "Answers come from a **built-in JSON knowledge base** on the server plus optional **Ollama** (local LLM) when enabled in `application.properties`. To improve answers, edit **`chatbot/knowledge.json`** and restart Spring. For smarter paraphrases, install Ollama and set **chatbot.ollama.enabled=true**.",
+      "link": "/",
+      "linkLabel": "See CHATBOT_SETUP.txt"
+    },
+    {
+      "id": "dark_mode",
+      "keywords": ["dark", "light", "theme", "mode", "brightness", "night"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Dark mode",
+      "body": "Dashboards with a **theme toggle** (moon/sun icon) switch **dark** and **light** mode for comfort. Preference is typically in React state from the parent `App` component.",
+      "link": "/hotel",
+      "linkLabel": "Any panel"
+    },
+    {
+      "id": "dog_stray_donation",
+      "keywords": ["dog", "stray", "animal", "pet", "pooch", "street dog"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Donations for stray dogs",
+      "body": "When publishing, choose donation type **DOG** (Stray dogs) if food is meant for animals, not human consumption. Needy/stray workflows can filter by type. Do not list unsafe human food as HUMAN.",
+      "link": "/hotel",
+      "linkLabel": "Hotel"
+    },
+    {
+      "id": "proof_delivery_compost",
+      "keywords": ["proof", "delivery proof", "compost proof", "photo proof", "evidence", "completed"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Delivery and compost proof",
+      "body": "Volunteers or agencies may upload **proof images** when a delivery or compost run completes so donors and admins can verify outcomes. Look for proof sections in tracking or request dialogs.",
+      "link": "/volunteer",
+      "linkLabel": "Volunteer"
+    },
+    {
+      "id": "websocket_general",
+      "keywords": ["websocket", "sockjs", "stomp", "realtime", "real-time", "live update"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Real-time updates",
+      "body": "Some features use **WebSockets** (e.g. SockJS/STOMP to `/ws`) for live tracking. If live updates fail, confirm Spring WebSocket config and that nothing blocks WebSocket on your network or reverse proxy.",
+      "link": "/hotel",
+      "linkLabel": "Hotel tracking"
+    },
+    {
+      "id": "train_dataset",
+      "keywords": ["train", "dataset", "huggingface", "download_dataset", "fruit", "images", "accuracy", "keras", "tensorflow"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Training the freshness model",
+      "body": "From **`freshness-api`**: run **`python download_dataset.py`** to pull a large fruit fresh/rotten set (Hugging Face), then **`python train.py`** to produce **`food_model.h5`** and **`class_indices.json`**. Add your own photos under `dataset/train` and `validation` folders to improve domain coverage. See **`RUN.txt`** in that folder.",
+      "link": "/",
+      "linkLabel": "freshness-api docs"
+    },
+    {
+      "id": "uncertain_ai",
+      "keywords": ["uncertain", "low confidence", "not sure", "0.6", "unsafe", "ambiguous"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Uncertain AI results",
+      "body": "If confidence is **below ~0.6**, the model shows an **uncertain** style message and conservative handling. Treat AI as **assistive**, not a legal food-safety certificate — use human judgment and local regulations.",
+      "link": "/hotel",
+      "linkLabel": "Hotel"
+    },
+    {
+      "id": "spring_boot_ports",
+      "keywords": ["port", "8080", "server.port", "bind", "address", "0.0.0.0"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Spring Boot server port",
+      "body": "Default API port is often **8080** (`server.port` in `application.properties`). The React app must point to the same host/port in `api.js`. Python freshness usually uses **8000** — different port, configured separately.",
+      "link": "/",
+      "linkLabel": "Home"
+    },
+    {
+      "id": "jwt_config",
+      "keywords": ["jwt.secret", "jwt.expiration", "token expiry", "86400000", "signing"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "JWT configuration",
+      "body": "**jwt.secret** and **jwt.expiration** in `application.properties` control token signing and lifetime. Use a **long random secret** in production. After changing secrets, all users must **log in again**.",
+      "link": "/",
+      "linkLabel": "application.properties"
+    },
+    {
+      "id": "file_storage_uploads",
+      "keywords": ["uploads", "file.upload.dir", "storage", "disk", "save file"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Where files are stored",
+      "body": "Uploaded images are saved under **`file.upload.dir`** (default `./uploads` relative to Spring’s working directory). Ensure that folder is writable and backed up if you need durability.",
+      "link": "/",
+      "linkLabel": "Config"
+    },
+    {
+      "id": "google_maps",
+      "keywords": ["google maps", "maps api", "geocode", "location key"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Maps API key",
+      "body": "If your build uses **Google Maps**, set **`google.maps.api.key`** in `application.properties`. OpenStreetMap tiles may be used elsewhere without that key — depends on component.",
+      "link": "/",
+      "linkLabel": "Home"
+    },
+    {
+      "id": "sms_twilio",
+      "keywords": ["sms", "twilio", "text message", "phone notify"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "SMS configuration",
+      "body": "Placeholders exist for **SMS API** keys in `application.properties` (`sms.api.key`, `sms.api.secret`). Wire them to your provider (e.g. Twilio) in code if SMS features are implemented in your branch.",
+      "link": "/",
+      "linkLabel": "Config"
+    },
+    {
+      "id": "production_deploy",
+      "keywords": ["production", "deploy", "nginx", "https", "reverse proxy", "docker", "server"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Production deployment tips",
+      "body": "Run Spring behind **HTTPS** (e.g. nginx), set strong **secrets**, restrict **MySQL** and **Python** services to internal networks, update **CORS** allowed origins to your real frontend domain, and use environment-specific `application.properties` or profiles.",
+      "link": "/",
+      "linkLabel": "Home"
+    },
+    {
+      "id": "hotel_points_donation",
+      "keywords": ["10 points", "points for donation", "created donation", "reward donor"],
+      "roles": ["HOTEL", "ALL"],
+      "public": true,
+      "title": "Points when creating a donation",
+      "body": "Creating a donation typically **awards points** (e.g. +10 in the default gamification hook) so donors stay motivated. Check your points card on the Hotel dashboard after publishing.",
+      "link": "/hotel",
+      "linkLabel": "Hotel"
+    },
+    {
+      "id": "request_volunteer_needy",
+      "keywords": ["request", "who requests", "needy request", "volunteer assigned", "assign volunteer"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Who creates pickup requests?",
+      "body": "**Needy** (or similar) users create **requests** against published donations. **Volunteers** fulfill pickups and updates. Hotels see **requests for their donations** in their dashboard sections (e.g. live request tracking).",
+      "link": "/needy",
+      "linkLabel": "Needy"
+    },
+    {
+      "id": "inventory_quantity",
+      "keywords": ["quantity", "meals", "how many", "portion", "servings"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Quantity field",
+      "body": "**Quantity** is the number of **meals or portions** you are offering (integer). Be realistic so pickup and demand stay aligned.",
+      "link": "/hotel",
+      "linkLabel": "Hotel form"
+    },
+    {
+      "id": "address_pickup",
+      "keywords": ["address", "pickup", "where", "location", "latitude", "longitude", "coordinates", "map pin"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Pickup address and coordinates",
+      "body": "Enter a clear **pickup address** for volunteers. **Latitude/longitude** are optional but help maps and routing; you can paste coordinates if you have them.",
+      "link": "/hotel",
+      "linkLabel": "Hotel"
+    },
+    {
+      "id": "error_upload_image",
+      "keywords": ["upload failed", "image upload", "401 upload", "403 upload", "formdata", "multipart"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Image upload errors",
+      "body": "Upload requires **authentication** for `/api/files/upload`. The browser must send **multipart/form-data** with the file field; the React interceptor removes manual Content-Type so the boundary is correct. If **403**, your account may be **pending approval**.",
+      "link": "/hotel",
+      "linkLabel": "Hotel"
+    },
+    {
+      "id": "ollama_chatbot",
+      "keywords": ["ollama", "llama", "local llm", "chatbot.ollama", "open source llm"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Ollama for the help chatbot",
+      "body": "Optional: set **chatbot.ollama.enabled=true**, **chatbot.ollama.base-url**, and **chatbot.ollama.model** in Spring. Install **Ollama** locally and `ollama pull` your model. The assistant uses it when FAQ match is weak — no cloud API key required.",
+      "link": "/",
+      "linkLabel": "CHATBOT_SETUP.txt"
+    },
+    {
+      "id": "privacy_data",
+      "keywords": ["privacy", "data", "personal", "gdpr", "who sees"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Privacy and data",
+      "body": "Donations and requests contain operational data (food details, locations, photos). Run ShareBite under your organization’s **privacy policy**; restrict admin access; use HTTPS in production; limit who can export database backups.",
+      "link": "/",
+      "linkLabel": "Home"
+    },
+    {
+      "id": "troubleshoot_ai_503",
+      "keywords": ["503", "freshness unavailable", "model not loaded", "service unavailable", "python down"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "AI service 503 or unavailable",
+      "body": "Start **uvicorn** for `freshness-api`, ensure **`food_model.h5`** exists after training, and verify **freshness.api.base-url** in Spring matches the Python host/port. Open **`GET /health`** on the Python app to see **model_loaded**.",
+      "link": "/",
+      "linkLabel": "freshness-api"
+    },
+    {
+      "id": "refresh_donations",
+      "keywords": ["refresh", "reload", "not showing", "list empty", "update list"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Refreshing data on dashboards",
+      "body": "Many panels have a **Refresh** button to reload donations or requests from the API. If lists look stale, click Refresh or re-open the page after ensuring Spring and MySQL are healthy.",
+      "link": "/hotel",
+      "linkLabel": "Hotel"
+    },
+    {
+      "id": "zero_waste_mission",
+      "keywords": ["zero waste", "food waste", "hunger", "sustainability", "environment"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Zero food waste mission",
+      "body": "ShareBite aligns with **reducing food waste** and **feeding people** (or animals / compost) instead of landfills. Hotels reduce disposal costs; communities gain meals; volunteers earn recognition.",
+      "link": "/",
+      "linkLabel": "Home"
+    },
+    {
+      "id": "contact_support",
+      "keywords": ["support", "contact", "help me", "human", "ticket", "email support"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Human support",
+      "body": "This assistant answers common **product** questions. For account bans, legal issues, or bugs not covered here, contact your **organization’s administrator** or the **development team** maintaining this deployment.",
+      "link": "/login",
+      "linkLabel": "Login"
+    },
+    {
+      "id": "report_issue",
+      "keywords": ["bug", "error", "broken", "not working", "crash", "exception"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Something is broken",
+      "body": "Check **browser devtools** (Network/Console) for failed API calls. Verify **Spring logs**, **MySQL** connectivity, and **Python** logs for AI. Note the **URL**, **HTTP status**, and steps to reproduce when reporting to developers.",
+      "link": "/",
+      "linkLabel": "Home"
+    },
+    {
+      "id": "compost_vs_human",
+      "keywords": ["when compost", "rotten human", "unsafe eat", "not edible"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "When to choose compost type",
+      "body": "If food is **spoiled** or **unsafe for humans**, use type **COMPOST** (or follow AI suggestion when confident). Human consumption donations must be **safe and within expiry**; never list clearly hazardous food as HUMAN.",
+      "link": "/hotel",
+      "linkLabel": "Hotel"
+    },
+    {
+      "id": "stats_homepage",
+      "keywords": ["stats", "statistics", "homepage", "dashboard numbers", "meals served"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Home page statistics",
+      "body": "The marketing **home** page may show aggregate **stats** (donations, meals, volunteers) loaded from public or authenticated API endpoints depending on build — useful for impact storytelling.",
+      "link": "/",
+      "linkLabel": "Home"
+    },
+    {
+      "id": "volunteer_gamification",
+      "keywords": ["volunteer points", "delivery points", "composted points"],
+      "roles": ["VOLUNTEER", "ALL"],
+      "public": true,
+      "title": "Volunteer points",
+      "body": "Completing deliveries or compost flows may **award points** (see gamification service rules in the backend). Check the Volunteer panel for your score.",
+      "link": "/volunteer",
+      "linkLabel": "Volunteer"
+    },
+    {
+      "id": "hotel_table_columns",
+      "keywords": ["table", "columns", "ai column", "donation history", "status chip"],
+      "roles": ["HOTEL", "ALL"],
+      "public": true,
+      "title": "Hotel donation table",
+      "body": "The **donation history** table shows food, **donation type**, an **AI** chip if an ML prediction was stored, **quantity**, **expiry**, and **status**. Use it to audit what you published.",
+      "link": "/hotel",
+      "linkLabel": "Hotel"
+    },
+    {
+      "id": "register_role_choice",
+      "keywords": ["choose role", "which role", "register as", "user type select"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Choosing a role at registration",
+      "body": "Pick the role that matches how you will use ShareBite: **Hotel** for surplus listings, **Needy** to request food, **Volunteer** for logistics, **NGO** for coordination, **Compost agency** for waste processing, **Admin** only if you operate the platform.",
+      "link": "/register",
+      "linkLabel": "Register"
+    },
+    {
+      "id": "logout_clear",
+      "keywords": ["logout", "log out", "sign out", "clear session"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Logging out",
+      "body": "Use **Logout** in the panel header to clear **token** and user info from the browser and return to the login screen. Use this on shared computers.",
+      "link": "/login",
+      "linkLabel": "Login"
+    },
+    {
+      "id": "api_endpoints_summary",
+      "keywords": ["endpoint", "rest", "api list", "/api/donations", "/api/requests", "/api/files"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Common API areas",
+      "body": "Spring exposes REST under **`/api`** — e.g. **donations**, **requests**, **files/upload**, **auth**, **gamification**, **freshness** (manual ratings), **freshness/ml/predict** (AI image), **chatbot**, **tracking**, **ws** for WebSocket. Explore controllers in the `backend` source for the full set.",
+      "link": "/",
+      "linkLabel": "Developer"
+    },
+    {
+      "id": "cors_error",
+      "keywords": ["cors", "blocked by cors", "cross origin", "allowed origins"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "CORS errors",
+      "body": "If the browser blocks requests, add your frontend origin to Spring **CORS** config (`cors.allowed.origins` or `SecurityConfig`). Frontend and API **ports** must match what you configured (e.g. localhost:3000 → localhost:8080).",
+      "link": "/",
+      "linkLabel": "Home"
+    },
+    {
+      "id": "time_zone_expiry",
+      "keywords": ["timezone", "utc", "server time", "datetime local"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Times and time zones",
+      "body": "Use consistent **time zones** for expiry fields. JDBC often uses **UTC** in URLs (`serverTimezone=UTC`). Pickup times should be clear to volunteers in **local** context.",
+      "link": "/",
+      "linkLabel": "Config"
+    },
+    {
+      "id": "server_ai_on_publish",
+      "keywords": ["server ai", "publish", "authoritative", "spoof", "ml_safety", "override reason", "rotten block", "require-successful-ml"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Server-side AI when publishing",
+      "body": "When a hotel **publishes** a donation with a photo stored under `/api/files/...`, Spring **reads that file** and calls the Python CNN again. **`mlFreshness*`** on the saved row comes from the **server**, not the browser. If AI says **ROTTEN** with high confidence and type is **HUMAN** or **DOG**, publish is **blocked** until you choose **COMPOST** or provide **`mlPolicyOverrideReason`** (15+ characters) for audit. Set **`freshness.publish.require-successful-ml=true`** to require AI to succeed whenever a local photo exists.",
+      "link": "/hotel",
+      "linkLabel": "Hotel"
+    },
+    {
+      "id": "need_help_navigate",
+      "keywords": ["where", "navigate", "menu", "sidebar", "find panel"],
+      "roles": ["ALL"],
+      "public": true,
+      "title": "Finding your way in the app",
+      "body": "After login you land on **your role’s dashboard**. Use page titles, **Publish donation** (Hotel), tables, and **Refresh**. The floating **Help** button opens this assistant on any supported screen.",
+      "link": "/",
+      "linkLabel": "Home"
+    }
+  ]
+}
